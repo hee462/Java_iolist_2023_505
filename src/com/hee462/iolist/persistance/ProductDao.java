@@ -17,7 +17,7 @@ public interface ProductDao {
 	
 	@Select("SELECT * FROM " + DBContract.TABLE.PRODUCT
 				+" WHERE pCode =#{id}")
-	public ProductDto findById(String id);
+	public ProductDto findById(String ioPCode);
 	
 	@Insert(ProductSQL.INSERT)
 	public int insert(ProductDto productDto);
@@ -30,5 +30,5 @@ public interface ProductDao {
 							+ " WHERE pName LIKE '%' || #{pName} || '%' "
 							+ " ORDER BY pName ")
 	
-	public List<ProductDao> findByPName(String pName);
+	public List<ProductDto> findByPName(String pName);
 }

@@ -171,6 +171,11 @@ public class BuyerServiceImplV1 implements BuyerService{
 			if(buyerList == null || buyerList.isEmpty()) {
 				HelpMessage.ERROR("찾는 고객이 없습니다");
 				continue;
+				// list에 담긴 정보가 두개이상이면 고객아이디 검색 진행
+				//  					한개이면 고객정보리스트 리턴
+			}else if(buyerList.size() < 2) {
+				// 이름으로 검색한 고객의 데이터가 1개뿐인경우 ID를 검색하는 절차 필요 업음
+				return buyerList.get(0);
 			}
 			//list 출력
 			System.out.println(AnsiConsol.CYAN(Line.sLine(70)));
@@ -178,6 +183,7 @@ public class BuyerServiceImplV1 implements BuyerService{
 			System.out.println(AnsiConsol.CYAN(Line.sLine(70)));
 			
 			BuyerDto buyerDto = this.findById();
+			
 			if(buyerDto == null) {
 				HelpMessage.ERROR("고객ID를 확인하세요");
 				System.out.println("고객 찾기를 그만두시겠습니까?( Y/N )");
